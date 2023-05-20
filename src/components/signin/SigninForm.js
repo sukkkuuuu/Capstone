@@ -13,6 +13,7 @@ const SigninForm = () => {
             [e.target.name] : e.target.value
         });
     };
+    
     console.log(form.email)
     return (
         <div className={styles.signinForm}>

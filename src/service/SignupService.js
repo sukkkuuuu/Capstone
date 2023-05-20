@@ -4,9 +4,12 @@ class SignupService {
     signup(form) {
         const data = JSON.stringify({
             email: form.email,
-            password1: form.pw1,
-            password2: form.pw2,
-            nickname: form.nickname
+            universityName: form.univName,
+            sno: form.sno,
+            password1: form.password1,
+            password2: form.password2,
+            nickname: form.nickname,
+            birthDate: form.birthDate
         });
         console.log(Constant.BASE_URL, data)
         axios.post(Constant.BASE_URL + "/member/signup", data, {
@@ -16,7 +19,11 @@ class SignupService {
         })
         .then((res) => res)
         .catch((res) => console.log(res.response.data["errors"]))
+    }
 
+    univList(setUnivList) {
+        return axios.get(Constant.BASE_URL + "/univ/list")
+        .then(res => setUnivList(res.data["data"]))
     }
 }
 

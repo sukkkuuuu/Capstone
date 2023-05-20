@@ -1,13 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
-import SigninForm from './components/signin/SigninForm';
-import SignupForm from './components/signup/SignupForm';
-
-function App() {
+import Header from './components/base/Header';
+import Router from './components/base/Router';
+import Footer from './components/base/Footer';
+import "./components/base/Base.css"
+const App = () => {
   return (
     <>
-      <SigninForm />
-      <SignupForm />
+      <Header />
+      <Router />
+      <Footer />
     </>
   );
 }
