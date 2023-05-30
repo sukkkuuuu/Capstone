@@ -17,8 +17,11 @@ class SignupService {
                 'Content-type' : 'application/json; charset=UTF-8'
             }
         })
-        .then((res) => res)
-        .catch((res) => console.log(res.response.data["errors"]))
+        .then((res) => {
+            alert("회원가입에 성공하셨습니다.");
+            window.location.replace("/");
+        })
+        .catch((res) => console.log(res.response["data"]["errors"]))
     }
 
     univList(setUnivList) {

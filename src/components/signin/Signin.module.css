@@ -1,6 +1,9 @@
 .signinForm {
     border: 1px solid black;
-    width: 500px;
+    border-radius: 5px;
+    background-color: rgb(229, 240, 250);
+    box-shadow: 0px 4px 4px 4px rgb(204, 222, 239);
+    width: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,14 +17,11 @@
 }
 .btn {
     display: block;
-    width: 100px;
-    padding: 5px;
-}
-
-.emailField {
-    
-}
-
-.passwordField {
-    
+    cursor: pointer;
+    background-color: rgb(255, 250, 250);
+    border-radius: 4px;
+    font-weight: 650px;
+    font-size: 16px;
+    margin: 17px auto;
+    padding: 10px 60px;
 }

@@ -1,5 +1,42 @@
 .header {
     width: 100%;
-    height: 100px;
-    background-color:aquamarine;
+    height: 130px;
+    background-color:rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(217, 217, 217);
+    box-shadow: 0px 3px 10px 0px rgb(198, 196, 196);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header a{
+    color: rgb(124, 124, 124);
+    text-decoration: none;
+    font-size: 17px;
+    font-weight:700;
+}
+
+.header a:hover{
+    color: rgb(140, 177, 184);
+}
+
+.header_btn {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 40px;
+    right: 0;
+    top: 0;
+}
+
+.upper_btn {
+    position: relative;
+}
+
+.bottom_btn {
+    position: relative;
+    padding-top: 5px;
+    right: 0;
+    top: 0;
 }

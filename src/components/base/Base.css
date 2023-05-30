@@ -1,3 +1,4 @@
-a {
-    color: black;
+body {
+    background-color: rgb(238, 240, 243);
+    max-width: 2048px;
 }

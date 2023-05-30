@@ -6,14 +6,18 @@ class SigninService {
             "email": id,
             "password": pw
         });
-        console.log(Constant.BASE_URL, data)
         axios.post(Constant.BASE_URL + "/member/signin", data, {
             headers: {
                 'Content-type' : 'application/json; charset=UTF-8'
             }
         })
-        .then((res) => res)
-        .catch((res) => console.log(res.response.data["errors"]))
+        .then((res) => {
+            alert("환영합니다.");
+            console.log(res.data["data"]["jwt"]);
+            window.localStorage.setItem("acc_tok", res.data["data"]["jwt"])
+            window.location.replace("/");
+        })
+        .catch((res) => console.log(res.response["data"]["errors"]))
 
     }
 }

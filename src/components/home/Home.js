@@ -1,6 +1,12 @@
+import Footer from "../base/Footer";
+
+
 const Home = () => {
     return (
-        <p> Home </p>
+        <>
+            <p> Home </p>
+            <Footer active="Home" />
+        </>
     );
 };
 
