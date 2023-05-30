@@ -41,7 +41,7 @@ const SignupForm = () => {
                     <input className={styles.field} type="text" placeholder="Student NO" name="sno" onChange={handleChange} />
                     <input className={styles.field} type="password" placeholder="Password1" name="password1" onChange={handleChange} />
                     <input className={styles.field} type="password" placeholder="Password2" name="password2" onChange={handleChange} />
-                    <input className={styles.field} type="text" placeholder="nickname" name="nickname" onChange={handleChange} />
+                    <input className={styles.field} type="text" placeholder="Nickname" name="nickname" onChange={handleChange} />
                     <span style={{fontSize:"16px", textAlign:"center"}}>Birth Date</span>
                     <input className={styles.field} type="date" value={form["birthDate"]} max={now} min="1900-01-01" name="birthDate" onChange={handleChange} />
                     <input className={styles.btn} type="submit" value="Go" onClick={(e) => {e.preventDefault(); SigniupService.signup(form);}} />

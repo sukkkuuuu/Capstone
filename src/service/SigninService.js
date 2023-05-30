@@ -1,7 +1,7 @@
 import axios from "axios";
 import Constant from "../constants/Constant"
 class SigninService {
-    signin(id, pw) {
+    signin(id, pw, errorInput) {
         const data = JSON.stringify({
             "email": id,
             "password": pw
@@ -17,7 +17,11 @@ class SigninService {
             window.localStorage.setItem("acc_tok", res.data["data"]["jwt"])
             window.location.replace("/");
         })
-        .catch((res) => console.log(res.response["data"]["errors"]))
+        .catch((res) => {
+            console.log(res.response["data"]["errors"]);
+            console.log(errorInput);
+            // errorInput.current.focus();
+        })
 
     }
 }
