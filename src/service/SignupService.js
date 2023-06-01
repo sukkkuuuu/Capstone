@@ -1,7 +1,7 @@
 import axios from "axios";
 import Constant from "../constants/Constant"
 class SignupService {
-    signup(form) {
+    signup(form, setErrors) {
         const data = JSON.stringify({
             email: form.email,
             universityName: form.univName,
@@ -19,14 +19,14 @@ class SignupService {
         })
         .then((res) => {
             alert("회원가입에 성공하셨습니다.");
-            window.location.replace("/");
+            window.location.replace("/signin");
         })
-        .catch((res) => console.log(res.response["data"]["errors"]))
+        .catch((res) => setErrors(res.response["data"]["errors"]))
     }
 
-    univList(setUnivList) {
-        return axios.get(Constant.BASE_URL + "/univ/list")
-        .then(res => setUnivList(res.data["data"]))
+    async univList(setUnivList) {
+        const res = await axios.get(Constant.BASE_URL + "/univ/list")
+        setUnivList(res.data["data"])
     }
 }
 

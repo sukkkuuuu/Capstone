@@ -11,7 +11,7 @@ const Header = ({isLogin, onLogout}) => {
                     <Link className={styles.upper_btn} to="/signin">로그인</Link>
                 }
                 {isLogin ? 
-                    <a className={styles.bottom_btn} onClick={onLogout}>로그아웃</a> : 
+                    <a className={styles.bottom_btn} onClick={onLogout} href="">로그아웃</a> : 
                     <Link className={styles.bottom_btn} to="/signup">회원가입</Link>
                 }
             </div>

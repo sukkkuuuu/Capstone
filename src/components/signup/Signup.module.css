@@ -34,3 +34,10 @@
     width: 200px;
     margin-bottom: 10px;
 }
+
+.error_box {
+    border: 2px dashed rgb(255, 135, 135);
+    color: rgb(255, 35, 35);
+    padding : 20px;
+    margin-top: 15px;
+}

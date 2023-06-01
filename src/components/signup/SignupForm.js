@@ -7,7 +7,8 @@ import Footer from "../base/Footer";
 const date = new Date();
 const now = `${date.getFullYear()}-${(date.getMonth() < 10 ? '0' : '' )+ date.getMonth() }-${date.getDate()}`;
 const SignupForm = () => {
-    const [univList, setUnivList] = useState([])
+    const [univList, setUnivList] = useState([]);
+    const [errors, setErrors] = useState();
     const[form, setForm] = useState({
         email: "",
         sno: "",
@@ -44,9 +45,15 @@ const SignupForm = () => {
                     <input className={styles.field} type="text" placeholder="Nickname" name="nickname" onChange={handleChange} />
                     <span style={{fontSize:"16px", textAlign:"center"}}>Birth Date</span>
                     <input className={styles.field} type="date" value={form["birthDate"]} max={now} min="1900-01-01" name="birthDate" onChange={handleChange} />
-                    <input className={styles.btn} type="submit" value="Go" onClick={(e) => {e.preventDefault(); SigniupService.signup(form);}} />
+                    <input className={styles.btn} type="submit" value="Go" onClick={(e) => {e.preventDefault(); SigniupService.signup(form, setErrors);}} />
                         
                 </form>
+                {
+                errors && 
+                    <div className={styles.error_box}>
+                        {errors.map((err, idx) => <li key={idx}>{err}</li>)}
+                    </div>
+                }
             </div>
             <Footer />
         </>

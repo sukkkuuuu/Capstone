@@ -5,8 +5,10 @@ import "./components/base/Base.css"
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Constant from './constants/Constant';
+import Loading from "./components/base/Loading";
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const onLogout = () => {
     window.localStorage.removeItem("acc_tok");
     setIsLogin(false);
@@ -25,21 +27,25 @@ const App = () => {
         } else {
           onLogout();
         }
+        setIsLoading(false)
       } catch(err) {
         console.log(err);
+        setIsLoading(false)
       }
     }
     checkTokenVaild();
   }, []);
   return (
     <>
-
       <Header isLogin={isLogin} onLogout={onLogout} />
-      <div style={{display: "flex",  height: "80vh",justifyContent: "center", alignItems: "center"}}>
-        <Router isLogin={isLogin} onLogout={onLogout} />
-      </div>
+      { !isLoading && (
+        <div style={{display: "flex",  height: "80vh",justifyContent: "center", alignItems: "center", marginBottom:"200px"}}>
+          <Router isLogin={isLogin} onLogout={onLogout} />
+        </div>
+      )}
     </>
-  );
+  )
 }
+
 
 export default App;

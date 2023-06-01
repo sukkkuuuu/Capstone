@@ -3,6 +3,10 @@ import Home from "../home/Home";
 import SigninForm from "../signin/SigninForm";
 import SignupForm from "../signup/SignupForm";
 import MyPage from "../mypage/MyPage";
+import Meeting from "../meeting/Meeting";
+import MeetingForm from "../meeting/MeetingForm";
+import MeetingDetail from "../meeting/MeetingDetail";
+import Learning from "../learning/Learning";
 
 const Router = ({isLogin, onLogout}) => {
     return (
@@ -11,6 +15,12 @@ const Router = ({isLogin, onLogout}) => {
             <Route path="/signin" element={ isLogin ? <Home /> : <SigninForm /> } />
             <Route path="/signup" element={ isLogin ? <Home /> : <SignupForm /> } />
             <Route path="/mypage" element={ isLogin ? <MyPage onLogout={onLogout} /> : <Home /> } />
+            
+            <Route path="/meeting" element={<Meeting isLogin={isLogin} />} />
+            <Route path="/meeting/create" element={ isLogin ? <MeetingForm /> : <Meeting /> } />
+            <Route path="/meeting/:id" element={ <MeetingDetail isLogin={isLogin} /> } />
+
+            <Route path="/learning" element={<Learning isLogin={isLogin} />} />
         </Routes>
     )
 }

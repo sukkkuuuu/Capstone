@@ -20,8 +20,15 @@
     cursor: pointer;
     background-color: rgb(255, 250, 250);
     border-radius: 4px;
-    font-weight: 650px;
+    font-weight: 650;
     font-size: 16px;
     margin: 17px auto;
     padding: 10px 60px;
+}
+
+.error_box {
+    border: 2px dashed rgb(255, 135, 135);
+    color: rgb(255, 35, 35);
+    padding : 20px;
+    margin-top: 15px;
 }

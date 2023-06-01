@@ -31,11 +31,11 @@ const Footer = ({active}) => {
                 <div className={ `${styles.container_content} ${active == "Home" && styles.active}` }>
                     <Link to="/">Home</Link>
                 </div>
-                <div className={ `${styles.container_content} ${active == "Signin" && styles.active}`}>
-                    <Link to="/signin">Meeting</Link>
+                <div className={ `${styles.container_content} ${active == "Meeting" && styles.active}`}>
+                    <Link to="/meeting">Meeting</Link>
                 </div>
-                <div className={ `${styles.container_content} ${active == "Signup" && styles.active}`}>
-                    <Link to="/signup">Learning</Link>
+                <div className={ `${styles.container_content} ${active == "Learning" && styles.active}`}>
+                    <Link to="/learning">Learning</Link>
                 </div>
             </div>
         </footer>

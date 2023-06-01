@@ -1,7 +1,9 @@
 import axios from "axios";
+import { createRoot } from 'react-dom/client'
 import Constant from "../constants/Constant"
+import styles from "../components/signin/Signin.module.css"
 class SigninService {
-    signin(id, pw, errorInput) {
+    signin(id, pw, setErrors) {
         const data = JSON.stringify({
             "email": id,
             "password": pw
@@ -13,14 +15,11 @@ class SigninService {
         })
         .then((res) => {
             alert("환영합니다.");
-            console.log(res.data["data"]["jwt"]);
             window.localStorage.setItem("acc_tok", res.data["data"]["jwt"])
             window.location.replace("/");
         })
         .catch((res) => {
-            console.log(res.response["data"]["errors"]);
-            console.log(errorInput);
-            // errorInput.current.focus();
+            setErrors(res.response["data"]["errors"]);
         })
 
     }
