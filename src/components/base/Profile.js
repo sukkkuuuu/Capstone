@@ -46,7 +46,7 @@ const Profile = () => {
             </div>
             <Footer />  
         </>
-        : <ProfileError />    
+        : <ProfileError nickname={nickname} />    
 };
 
 export default Profile;
