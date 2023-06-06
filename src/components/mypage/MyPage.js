@@ -72,8 +72,7 @@ const MyPage = ({onLogout}) => {
         mypageLoad();
     }, [])
     return isLoading ? <Loading />  : (
-        <>
-            
+        <>            
             <div className={styles.content_container}>
                 <div style={{display:"flex", justifyContent:"center", marginBottom:"30px"}}>
                     <h2>마이페이지</h2>

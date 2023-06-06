@@ -7,6 +7,7 @@ import Meeting from "../meeting/Meeting";
 import MeetingForm from "../meeting/MeetingForm";
 import MeetingDetail from "../meeting/MeetingDetail";
 import Learning from "../learning/Learning";
+import Profile from "./Profile";
 
 const Router = ({isLogin, onLogout}) => {
     return (
@@ -15,6 +16,7 @@ const Router = ({isLogin, onLogout}) => {
             <Route path="/signin" element={ isLogin ? <Home /> : <SigninForm /> } />
             <Route path="/signup" element={ isLogin ? <Home /> : <SignupForm /> } />
             <Route path="/mypage" element={ isLogin ? <MyPage onLogout={onLogout} /> : <Home /> } />
+            <Route path="/profile/:nickname" element={ <Profile />} />
             
             <Route path="/meeting" element={<Meeting isLogin={isLogin} />} />
             <Route path="/meeting/create" element={ isLogin ? <MeetingForm /> : <Meeting /> } />

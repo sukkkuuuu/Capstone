@@ -43,9 +43,11 @@ const Meeting = ({isLogin}) => {
                         <div>
                             <span className={`${styles.board_field} ${styles.board_id}`}>{currentPage * 5 + idx + 1}</span>
                             <span className={`${styles.board_field} ${styles.board_title}`}>
-                                <Link to={`/meeting/${boards[`${key}`]["id"]}`}>{boards[`${key}`]["title"]}</Link>
+                                <Link style={{textDecoration:'none'}} to={`/meeting/${boards[`${key}`]["id"]}`}>{boards[`${key}`]["title"]}</Link>
                             </span>
-                            <span className={`${styles.board_field} ${styles.board_writer}`}>{boards[`${key}`]["writer"]["nickname"]}</span>
+                            <span className={`${styles.board_field} ${styles.board_writer}`}>
+                                <Link style={{textDecoration:'none'}} to={`/profile/${boards[`${key}`]["writer"]["nickname"]}`}>{boards[`${key}`]["writer"]["nickname"]}</Link>
+                            </span>
                             <span className={`${styles.board_field} ${styles.board_date}`}>
                                 {dateFomatting(boards[`${key}`]["createdDate"])}
                             </span>

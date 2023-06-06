@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Footer from "../base/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -104,7 +104,7 @@ const MeetingDetail = ({isLogin}) => {
     return !post ? <Loading /> : (
         <>
             <div className={styles.board_container}>
-                <h2 style={{textAlign:"center"}}>{post["writer"]["nickname"]}님의 게시글</h2>
+                <h2 style={{textAlign:"center"}}><Link style={{textDecoration:'none'}} to={`/profile/${post["writer"]["nickname"]}`}>{post["writer"]["nickname"]}</Link>님의 게시글</h2>
                 <div class={styles.board_detail_date}>{dateFomatting(post["createdDate"])}</div>
                 <h3>제목</h3>
                 <div class={`${styles.board_detail_field} ${styles.board_detail_title}`}>{post["title"]}</div>
@@ -130,7 +130,9 @@ const MeetingDetail = ({isLogin}) => {
                             {comments && Object.keys(comments).map((key) => 
                                 <div className={styles.comment_container}>
                                     <div style={{display:"flex", justifyContent:"space-between"}}>
-                                        <span className={styles.comment_nickname}>{comments[`${key}`]["member"]["nickname"]}</span>
+                                        <Link style={{textDecoration:'none'}} to={`/profile/${comments[`${key}`]["member"]["nickname"]}`}>
+                                            <span className={styles.comment_nickname}>{comments[`${key}`]["member"]["nickname"]}</span>
+                                        </Link>
                                         <span className={styles.comment_date}>{dateFomatting(comments[`${key}`]["createdDate"])}</span>
                                     </div>
                                     <span className={styles.comment_content}>{comments[`${key}`]["content"]}</span>
