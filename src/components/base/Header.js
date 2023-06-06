@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css"
 import Logo from "../../logo.png"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Header = ({isLogin, onLogout}) => {
     const navigate = useNavigate();
     const [nickname, setNickname] = useState('');
@@ -15,6 +15,7 @@ const Header = ({isLogin, onLogout}) => {
                     <input className={styles.search_btn} type="submit" value="검색" onClick={(e) => {
                         e.preventDefault();
                         navigate(`/profile/${nickname}`);
+                        setNickname('');
                     }} />
                 </form>
             </div>
