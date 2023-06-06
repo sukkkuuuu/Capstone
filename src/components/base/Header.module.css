@@ -40,3 +40,20 @@
     right: 0;
     top: 0;
 }
+
+.search_box {
+    position: absolute;
+    padding: 20px 40px;
+    left: 0;
+    top: 0;
+}
+
+.search_input {
+    padding: 4px;
+    width: 200px;
+}
+
+.search_btn {
+    padding: 3px;
+    margin-left: 3px;
+}

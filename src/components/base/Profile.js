@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "./Loading";
 import styles from "./Profile.module.css";
+import ProfileError from "./ProfileError";
 
 const Profile = () => {
     const { nickname } = useParams();
@@ -17,12 +18,14 @@ const Profile = () => {
                 setMember(response.data.data);
                 setIsLoading(false);
             }catch(err){
-                alert(err);
+                setMember();
+                setIsLoading(false);
             }
         }
         fetchMember();
-    }, []);
-    return isLoading ? <Loading /> : (
+    }, [nickname]);
+    return isLoading ? <Loading /> : 
+        member ?
         <>
             <div className={styles.content_container}>
                 <div style={{display:"flex", justifyContent:"center", marginBottom:"30px"}}>
@@ -43,7 +46,7 @@ const Profile = () => {
             </div>
             <Footer />  
         </>
-    );
+        : <ProfileError />    
 };
 
 export default Profile;

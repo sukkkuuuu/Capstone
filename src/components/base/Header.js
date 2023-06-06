@@ -1,9 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css"
 import Logo from "../../logo.png"
+import { useState } from "react";
 const Header = ({isLogin, onLogout}) => {
+    const navigate = useNavigate();
+    const [nickname, setNickname] = useState('');
     return (
         <header className={styles.header}>
+            <div className={styles.search_box}>
+                <form>
+                    <input className={styles.search_input} type="search" placeholder="검색할 유저를 입력하세요." value={nickname} onChange={(e) => {
+                        setNickname(e.target.value)}
+                    } />
+                    <input className={styles.search_btn} type="submit" value="검색" onClick={(e) => {
+                        e.preventDefault();
+                        navigate(`/profile/${nickname}`);
+                    }} />
+                </form>
+            </div>
             <img src={Logo} width="100" />
             <div className={styles.header_btn}>
                 {isLogin ?
