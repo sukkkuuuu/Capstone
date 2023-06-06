@@ -47,7 +47,6 @@ const MeetingDetail = ({isLogin}) => {
         const fetchComments = async () => {
             try{
                 const response = await axios.get(Constant.BASE_URL + `/comment/${id}`);
-                console.log(response.data.data);
                 setComments(response.data.data);
             }catch(err){
                 alert(err);
