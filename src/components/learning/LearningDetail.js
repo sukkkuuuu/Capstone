@@ -4,22 +4,22 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Constant from "../../constants/Constant";
 import Loading from "../base/Loading";
-import styles from "./Meeting.module.css";
+import styles from "./Learning.module.css";
 import commentLogo from "../../comment.png";
 import closeLogo from "../../close.png";
 
 const API_KEY = "ae71f810872db5e99e115e9e6fee3156";
 const { kakao } = window;
 
-const MeetingDetail = ({ isLogin }) => {
+const LearningDetail = ({ isLogin }) => {
     const { id } = useParams();
     const [post, setPost] = useState();
+    const [longitude, setLongitude] = useState("");
+    const [latitude, setLatitude] = useState("");
     const [memberId, setMemberId] = useState(null);
     const [showCommentModal, setShowCommentModal] = useState(false);
     const [commentInput, setCommentInput] = useState("");
     const [comments, setComments] = useState([]);
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
     const navigate = useNavigate();
     const dateFomatting = (date) => {
         const [year, month, day] = date.slice(0, 10).split("-");
@@ -29,7 +29,7 @@ const MeetingDetail = ({ isLogin }) => {
     const deleteHandler = () => {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
             axios
-                .delete(Constant.BASE_URL + `/meeting/${post["id"]}`, {
+                .delete(Constant.BASE_URL + `/learning/${post["id"]}`, {
                     headers: {
                         Authorization: `Baerer ${window.localStorage.getItem(
                             "acc_tok"
@@ -38,11 +38,12 @@ const MeetingDetail = ({ isLogin }) => {
                 })
                 .then((res) => {
                     alert("게시글이 삭제되었습니다.");
-                    navigate(`/meeting`);
+                    navigate(`/learning`);
                 })
                 .catch((err) => console.log(err));
         }
     };
+
     const deleteCommentHandler = (id) => {
         if (window.confirm("댓글 삭제합니다.")) {
             axios
@@ -59,6 +60,7 @@ const MeetingDetail = ({ isLogin }) => {
                 .catch((err) => console.log(err));
         }
     };
+
     const openCommentModal = () => {
         commentListHandler();
         setShowCommentModal(true);
@@ -80,7 +82,6 @@ const MeetingDetail = ({ isLogin }) => {
         };
         fetchComments();
     };
-
     const commentCreateHandler = () => {
         const createComment = async () => {
             try {
@@ -112,13 +113,14 @@ const MeetingDetail = ({ isLogin }) => {
         const fetchPost = async () => {
             try {
                 const response = await axios.get(
-                    Constant.BASE_URL + `/meeting/${id}`
+                    Constant.BASE_URL + `/learning/${id}`
                 );
                 setPost(response.data.data.data);
             } catch (err) {
-                navigate("/meeting");
+                navigate("/learning");
             }
         };
+
         const fetchUser = async () => {
             try {
                 const response = await axios.get(
@@ -136,14 +138,14 @@ const MeetingDetail = ({ isLogin }) => {
                 alert(err);
             }
         };
-
         fetchPost();
         if (isLogin) fetchUser();
     }, [id]);
-    useEffect(() => {
-        const fetchLatLnt = async () => {
-            if (post === undefined) return;
 
+    useEffect(() => {
+        const fetchLagLnt = async () => {
+            if (post === undefined) return;
+            console.log("post", post.address);
             try {
                 const response = await axios
                     .get(
@@ -153,7 +155,7 @@ const MeetingDetail = ({ isLogin }) => {
                                 Authorization: `KakaoAK ${API_KEY}`,
                             },
                             params: {
-                                query: `${post.writer.university.address}`,
+                                query: `${post.address}`,
                             },
                         }
                     )
@@ -162,16 +164,15 @@ const MeetingDetail = ({ isLogin }) => {
                         setLatitude(res.data.documents[0].y);
                     });
             } catch (err) {
-                alert("에러");
+                alert(err);
             }
         };
-
-        fetchLatLnt();
+        fetchLagLnt();
     }, [post]);
+
     useEffect(() => {
         const fetchMap = async () => {
             if (!latitude || !longitude) return;
-
             try {
                 const container = document.getElementById("map");
                 const options = {
@@ -219,20 +220,15 @@ const MeetingDetail = ({ isLogin }) => {
                 >
                     {post["intro"]}
                 </div>
-                <h3>인원</h3>
-                <div style={{ fontSize: "20px", fontWeight: "600" }}>
-                    {post["count"]} : {post["count"]}
-                    <h3>위치</h3>
+                <h3>위치</h3>
+                <div id="map" className={styles.kakao_map_size}>
+                    {latitude} {longitude}
                 </div>
-                <div>
-                    <div className={styles.comment_font}>
-                        {post["writer"]["university"]["name"]}({" "}
-                        {post.writer.university.address})
-                    </div>
-                    <div id="map" className={styles.kakao_map_size}>
-                        {latitude} {longitude}
-                    </div>
+                <div className={styles.comment_font}>
+                    {" "}
+                    상세주소 : {post.address}{" "}
                 </div>
+
                 {isLogin && memberId == post["writer"]["id"] && (
                     <div className={styles.btn} onClick={deleteHandler}>
                         게시글 삭제
@@ -257,6 +253,7 @@ const MeetingDetail = ({ isLogin }) => {
                             title="닫기"
                             onClick={closeCommentModal}
                         />
+                        {/* 여기에 댓글 리스트들이 생성됨 */}
                         <h2>댓글 {`(${comments.length})`}</h2>
                         {comments &&
                             Object.keys(comments).map((key) => (
@@ -300,6 +297,9 @@ const MeetingDetail = ({ isLogin }) => {
                                                     "id"
                                                 ] && (
                                                 <input
+                                                    // className={
+                                                    //     styles.comment_delete_btn
+                                                    // }
                                                     type="submit"
                                                     value="댓글삭제"
                                                     onClick={() =>
@@ -316,6 +316,7 @@ const MeetingDetail = ({ isLogin }) => {
                                         {comments[`${key}`]["content"]}
                                     </span>
                                 </div>
+                                // 여기까지가 댓글 생성 되는 부분임
                             ))}
                         {isLogin && (
                             <div
@@ -352,9 +353,9 @@ const MeetingDetail = ({ isLogin }) => {
                     </div>
                 </div>
             )}
-            <Footer active="Meeting" />
+            <Footer active="Learning" />
         </>
     );
 };
 
-export default MeetingDetail;
+export default LearningDetail;

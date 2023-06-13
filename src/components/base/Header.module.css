@@ -7,6 +7,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 130px;
+    z-index: 1;
 }
 
 .header a{
