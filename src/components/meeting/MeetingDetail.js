@@ -71,7 +71,7 @@ const MeetingDetail = ({ isLogin }) => {
         const fetchComments = async () => {
             try {
                 const response = await axios.get(
-                    Constant.BASE_URL + `/comment/${id}`
+                    Constant.BASE_URL + `/comment/meeting/${id}`
                 );
                 setComments(response.data.data);
             } catch (err) {
@@ -88,7 +88,7 @@ const MeetingDetail = ({ isLogin }) => {
                     content: commentInput,
                 });
                 const response = await axios.post(
-                    Constant.BASE_URL + `/comment/${id}`,
+                    Constant.BASE_URL + `/comment/meeting/${id}`,
                     data,
                     {
                         headers: {
